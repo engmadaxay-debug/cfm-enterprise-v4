@@ -13,7 +13,7 @@ router.get('/', asyncHandler(async (req, res) => {
     pool.query(`SELECT person_type, COUNT(*)::int total FROM people ${owner} GROUP BY person_type`, params),
     pool.query(`SELECT currency_code, SUM(balance)::numeric(18,2) total FROM vault_accounts ${owner} GROUP BY currency_code`, params),
     pool.query(`SELECT module, COUNT(*)::int total, SUM(amount)::numeric(18,2) amount FROM transaction_journal ${owner} GROUP BY module ORDER BY total DESC LIMIT 8`, params),
-    pool.query(`SELECT closing_date, closing_balance, currency_code, status FROM daily_closings ${owner} ORDER BY closing_date DESC LIMIT 7`, params),
+    pool.query(`SELECT closing_date, counted_closing AS closing_balance, currency_code, status FROM daily_closings ${owner} ORDER BY closing_date DESC LIMIT 7`, params),
     pool.query(`SELECT COALESCE(SUM(profit_amount),0)::numeric(18,2) total_profit FROM exchange_transactions WHERE created_at::date >= date_trunc('month', CURRENT_DATE)::date ${ownerAnd}`, params),
     pool.query(`SELECT a.*, u.full_name user_name FROM activity_logs a LEFT JOIN users u ON u.id=a.user_id ${staff ? 'WHERE a.user_id=$1' : ''} ORDER BY a.created_at DESC LIMIT 8`, params),
   ]);
