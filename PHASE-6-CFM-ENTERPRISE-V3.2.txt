@@ -1,0 +1,67 @@
+CFM Enterprise v3.2 - Phase 6
+
+Waxyaabaha lagu daray:
+1. Security middleware
+   - Rate limiting
+   - Helmet headers
+   - CORS credentials
+   - JSON/content-type check
+   - XSS script sanitizing
+   - Request ID
+
+2. API / Production endpoints
+   - /api/phase6/health/production
+   - /api/phase6/swagger.json
+   - /api/phase6/config-check
+   - /api/phase6/backups
+   - /api/phase6/backup/run
+   - /api/phase6/security-events
+
+3. Database migration system
+   - backend/migrations/001_phase6_production.sql
+   - npm run migrate
+
+4. Logging
+   - logs/system.log
+   - logs/error.log
+   - logs/security.log
+   - logs/api.log
+
+5. Backup support
+   - npm run backup
+   - production_backups table
+
+6. Docker / Cloud
+   - Dockerfile
+   - frontend/Dockerfile
+   - docker-compose.prod.yml
+   - render.yaml
+   - railway.json
+
+7. CI/CD
+   - .github/workflows/ci.yml
+
+8. PWA
+   - frontend/public/manifest.webmanifest
+   - frontend/public/sw.js
+
+9. Frontend page
+   - /phase6
+   - /production
+
+Rakibid:
+Backend:
+  cd backend
+  npm install
+  npm run db:init
+  npm run migrate
+  npm run seed
+  npm run dev
+
+Frontend:
+  cd frontend
+  npm install
+  npm run dev
+
+Docker:
+  docker compose -f docker-compose.prod.yml up --build

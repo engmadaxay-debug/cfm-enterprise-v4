@@ -1,0 +1,23 @@
+CFM SIMPLE v1.1 - START HERE
+
+1) Install Docker Desktop and Node.js.
+2) Run: docker compose up -d
+3) In backend folder:
+   copy .env.example to .env
+   npm install
+   npm run db:init
+   npm run seed
+   npm run dev
+4) In frontend folder:
+   copy .env.example to .env
+   npm install
+   npm run dev
+5) Open http://localhost:5173
+
+Admin login:
+admin@cimraan.local
+ChangeMe123!
+
+Create employee logins from the Staff Accounts page.
+Each employee sees only their own people, vaults and financial records.
+Read BILOW-SOMALI.txt or README.md for full details.

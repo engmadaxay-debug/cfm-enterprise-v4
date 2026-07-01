@@ -1,0 +1,78 @@
+CFM Enterprise v3.1 - Phase 5
+
+Added in this phase:
+
+1) Calendar Module
+- Daily, weekly, monthly views
+- Due receivables
+- Due payables
+- Overdue receivables/payables
+- Daily closing reminder
+- Monthly closing reminder
+- Manual reminders
+
+2) Staff Isolation
+- Staff Isolation settings page
+- Default isolation enabled
+- Staff see their own records only in Phase 5 APIs
+- Admin sees all records
+- Manager full-view setting is configurable
+- Search/reports/journal/dashboard APIs use owner scoping where implemented
+
+3) Notifications
+- Due today
+- Overdue receivables/payables
+- Daily closing reminder
+- Manual notifications
+
+4) User Dashboard
+- Personal statistics
+- My receivables/payables
+- My exchange profit
+- My recent activity
+
+5) Admin Dashboard
+- Users by role
+- Online users
+- Login counts
+- Failed login count
+- Latest backup
+- Recent user activity
+- System health
+
+6) Security
+- Login history
+- Active sessions
+- Force logout backend endpoint for Admin
+- Password change backend endpoint
+- Session tracking
+
+Backend APIs added:
+- /api/calendar
+- /api/notifications
+- /api/staff-isolation
+- /api/security
+- /api/user-dashboard
+- /api/admin-dashboard
+
+Frontend pages added:
+- Calendar.jsx
+- Notifications.jsx
+- StaffIsolation.jsx
+- UserDashboard.jsx
+- AdminDashboard.jsx
+- Security.jsx
+
+Database additions:
+- calendar_events
+- notifications
+- login_history
+- user_sessions
+- password_history
+- staff_teams
+- staff isolation settings
+- online_users view
+
+Build checks:
+- Backend JS syntax check passed.
+- Frontend production build passed.

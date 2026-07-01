@@ -1,0 +1,25 @@
+CFM Enterprise v3.1 Phase 5
+
+Waxa lagu daray:
+- Calendar: daily, weekly, monthly, due, overdue, closing reminder
+- Staff Isolation: shaqaale kasta wuxuu arkaa shaqadiisa oo keliya
+- Notifications: due today, overdue, daily closing reminder
+- User Dashboard: shaqaalaha xogtiisa gaarka ah
+- Admin Dashboard: online users, login history, activity, backup status
+- Security: login history, sessions, force logout, password change backend
+
+Sida loo bilaabo:
+1. Fur project-ka VS Code.
+2. Backend:
+   cd backend
+   npm install
+   npm run db:init
+   npm run seed
+   npm run dev
+3. Frontend:
+   cd frontend
+   npm install
+   npm run dev
+
+Xusuus:
+Haddii aad ka timid Phase 4, waa inaad mar kale ordaa npm run db:init si tables-ka Phase 5 loo abuuro.

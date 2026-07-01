@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: cfm-simple-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cfm_simple
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - cfm_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  cfm_postgres_data:

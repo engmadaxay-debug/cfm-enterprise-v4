@@ -1,0 +1,23 @@
+CFM v3.0 Phase 4 Stable
+
+Waxa lagu daray Phase 4:
+1. Final system diagnostics page: /system-check
+2. Backend diagnostic endpoints: /api/system/diagnostics and /api/system/readiness
+3. Health endpoint updated with version info
+4. README and Somali installation guide improved
+5. Project check script: scripts/check-project.sh
+6. Final build/syntax verification
+7. Version labels updated to v3.0 Stable
+
+Sida loo hubiyo:
+- Backend: cd backend && npm install && npm run check
+- Frontend: cd frontend && npm install && npm run build
+- Database: cd backend && npm run db:init && npm run seed
+- App: open /system-check after login
+
+Login default:
+Email: admin@cimraan.local
+Password: ChangeMe123!
+
+Fiiro gaar ah:
+Production-ka ka hor beddel password-ka admin-ka iyo JWT_SECRET-ka .env.

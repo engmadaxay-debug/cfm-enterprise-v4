@@ -1,0 +1,34 @@
+CFM v3.0 Phase 1 - Waxa lagu daray
+
+1. Transaction Journal
+- API: /api/journal
+- Frontend: /journal
+- Dhammaan money records iyo payments cusub waxay geli doonaan journal.
+
+2. Customer Ledger
+- API: /api/ledgers/customers
+- Frontend: /customers/ledger
+- Waxaa ka muuqanaya customer transactions.
+
+3. Supplier Ledger
+- API: /api/ledgers/suppliers
+- Frontend: /suppliers/ledger
+- Waxaa ka muuqanaya supplier/vendor transactions.
+
+4. Opening Balance
+- API: /api/opening-balances
+- Frontend: /opening-balance
+- Customer, Supplier, Vault, Cash, Bank opening balance waa la geli karaa.
+- Marka la save gareeyo, wuxuu sidoo kale gelayaa Transaction Journal.
+
+5. Automatic Numbering
+- Tables: number_sequences
+- Noocyada: TRX, INV, REC, PAY, EXC, CUS, SUP, OB
+- Utility: backend/src/utils/numbering.js
+
+Database update:
+- Ku shub backend/sql/schema.sql database-kaaga PostgreSQL.
+- Haddii database hore jiray, schema.sql wuxuu leeyahay CREATE IF NOT EXISTS iyo ALTER IF NOT EXISTS.
+
+Important:
+- Phase 1 waa aasaaska. Phase 2 waxaa lagu dari doonaa Reconciliation, Daily Closing, Multi Currency expansion, iyo Exchange Profit logic oo dhamaystiran.
