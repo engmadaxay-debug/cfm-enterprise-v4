@@ -120,6 +120,7 @@ function getOrderedGroups(groups, order) {
 export default function Layout() {
   const { user, logout } = useAuth();
   const [dragTitle, setDragTitle] = useState(null);
+  const [openGroup, setOpenGroup] = useState('Dashboard');
   const [order, setOrder] = useState(() => {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; }
   });
@@ -168,21 +169,55 @@ export default function Layout() {
           <button type="button" className="small ghost" onClick={resetMenu}>Reset</button>
         </div>
         <nav>
-          {groups.map((group) => (
-            <div
-              className="nav-group"
-              key={group.title}
-              draggable
-              onDragStart={() => setDragTitle(group.title)}
-              onDragOver={(event) => event.preventDefault()}
-              onDrop={() => moveGroup(group.title)}
-            >
-              <strong title="Drag to reorder">☰ {group.title}</strong>
-              {group.links.map(([to, label]) => (
-                <NavLink key={to} to={to} end={to === '/'}>{label}</NavLink>
-              ))}
-            </div>
-          ))}
+          {groups.map((group) => {
+            const isOpen = openGroup === group.title;
+
+            return (
+              <div
+                className="nav-group"
+                key={group.title}
+                draggable
+                onDragStart={() => setDragTitle(group.title)}
+                onDragOver={(event) => event.preventDefault()}
+                onDrop={() => moveGroup(group.title)}
+              >
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpenGroup((current) =>
+                      current === group.title ? null : group.title
+                    )
+                  }
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    background: 'transparent',
+                    border: 'none',
+                    color: 'inherit',
+                    padding: '10px 8px',
+                    cursor: 'pointer',
+                    fontWeight: '700',
+                    textAlign: 'left',
+                  }}
+                >
+                  <span>☰ {group.title}</span>
+                  <span>{isOpen ? '▲' : '▼'}</span>
+                </button>
+
+                {isOpen && (
+                  <div className="nav-group-links">
+                    {group.links.map(([to, label]) => (
+                      <NavLink key={to} to={to} end={to === '/'}>
+                        {label}
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </nav>
         <div className="sidebar-user">
           <strong>{user?.fullName}</strong>
@@ -195,3 +230,4 @@ export default function Layout() {
     </div>
   );
 }
+
