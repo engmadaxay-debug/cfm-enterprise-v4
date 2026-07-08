@@ -120,6 +120,10 @@ function getOrderedGroups(groups, order) {
 export default function Layout() {
   const { user, logout } = useAuth();
   const [dragTitle, setDragTitle] = useState(null);
+  const [sidebarWidth, setSidebarWidth] = useState(() => {
+    const saved = Number(localStorage.getItem('cfm_sidebar_width_v1'));
+    return Number.isFinite(saved) && saved >= 240 && saved <= 460 ? saved : 360;
+  });
   const [openGroup, setOpenGroup] = useState('Dashboard');
   const [order, setOrder] = useState(() => {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; }
@@ -138,6 +142,10 @@ export default function Layout() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(order));
   }, [order]);
+  
+  useEffect(() => {
+    localStorage.setItem('cfm_sidebar_width_v1', String(sidebarWidth));
+  }, [sidebarWidth]);
 
   function moveGroup(targetTitle) {
     if (!dragTitle || dragTitle === targetTitle) return;
@@ -158,15 +166,69 @@ export default function Layout() {
   }
 
   return (
-    <div className="app-shell">
-      <aside className="sidebar">
+    <div className="app-shell" style={{ gridTemplateColumns: `${sidebarWidth}px minmax(0, 1fr)` }}>
+      <aside
+        className="sidebar"
+        style={{
+          width: `${sidebarWidth}px`,
+          minWidth: `${sidebarWidth}px`,
+          maxWidth: `${sidebarWidth}px`,
+          flex: `0 0 ${sidebarWidth}px`,
+          overflowX: 'hidden',
+          transition: 'width 0.25s ease',
+        }}
+      >
         <div className="brand">
           <span>CFM</span>
           <small>Professional Enterprise v4.0 Phase 1</small>
         </div>
         <div className="menu-tools">
-          <small>Drag groups to reorder</small>
-          <button type="button" className="small ghost" onClick={resetMenu}>Reset</button>
+          <small>Sidebar size</small>
+
+          <div
+            style={{
+              display: 'flex',
+              gap: '8px',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            <button
+              type="button"
+              className="small ghost"
+              title="Make sidebar smaller"
+              onClick={() => setSidebarWidth((w) => Math.max(240, w - 40))}
+            >
+              −
+            </button>
+
+            <button
+              type="button"
+              className="small ghost"
+              title="Make sidebar wider"
+              onClick={() => setSidebarWidth((w) => Math.min(460, w + 40))}
+            >
+              +
+            </button>
+
+            <span
+              style={{
+                fontSize: '12px',
+                minWidth: '52px',
+                textAlign: 'center',
+              }}
+            >
+              {sidebarWidth}px
+            </span>
+
+            <button
+              type="button"
+              className="small ghost"
+              onClick={resetMenu}
+            >
+              Reset
+            </button>
+          </div>
         </div>
         <nav>
           {groups.map((group) => {
@@ -207,7 +269,15 @@ export default function Layout() {
                 </button>
 
                 {isOpen && (
-                  <div className="nav-group-links">
+                  <div
+                    className="nav-group-links"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '6px',
+                      width: '100%',
+                    }}
+                  >
                     {group.links.map(([to, label]) => (
                       <NavLink key={to} to={to} end={to === '/'}>
                         {label}
@@ -230,4 +300,5 @@ export default function Layout() {
     </div>
   );
 }
+
 
